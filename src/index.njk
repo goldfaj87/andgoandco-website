@@ -1,0 +1,147 @@
+---
+layout: base.njk
+title: "Be Unique. Shape Your Market."
+description: "DNA-led innovation for experiences that make you uniquely valued and desired by the world."
+nav: home
+---
+<header class="hero">
+  <div class="hero-mark"><img src="/assets/img/logo.png" alt="&amp;go&amp;co."></div>
+  <div class="hero-rule"></div>
+  <h1 class="headline">Be Unique. <span class="accent">Shape</span> Your Market.</h1>
+  <p class="hero-sub">DNA-led innovation for experiences that make you uniquely valued and desired by the world. Recognizable in the dark and at a distance.</p>
+  <div class="hero-tags"><span>Outcome biased</span><span>Agile resourced</span></div>
+  <div class="scroll-cue">Scroll</div>
+</header>
+
+<main>
+  <section id="approach">
+    <div class="wrap reveal">
+      <span class="eyebrow">What we do</span>
+      <h2 class="section-title">We innovate with what makes you unique.</h2>
+      <div class="value-grid">
+        <div class="value-cell">
+          <h3>Beyond the logo.</h3>
+          <p>Helping great brands, products, services and experiences become feel-state recognizable in the dark or at a distance.</p>
+        </div>
+        <div class="value-cell">
+          <h3>Science-led.</h3>
+          <p>Scientific rigour demands a hypothesis-driven methodology to ask the right question and learn through iterative experimentation.</p>
+        </div>
+        <div class="value-cell">
+          <h3>Minimal teams.</h3>
+          <p>Always a curated assembly of highly experienced &amp; expert individuals at the intersection of creativity, technology, and commercial delivery.</p>
+        </div>
+        <div class="value-cell">
+          <h3>Outcome focused.</h3>
+          <p>Value delivery that far exceeds the cost — so talent, structure, strategy, and results are amplified, not just spent.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap reveal">
+      <span class="eyebrow">Our Innovation OS</span>
+      <h2 class="section-title">Mechanism creates possibility. Experience creates perception. Context shapes interpretation.</h2>
+      <p class="section-lede">Most companies optimise at one level. The best create an aligned feel-state across all three.</p>
+      <div class="dna-wrap">
+        <div class="dna-card">
+          <span class="dna-num">01 — Mechanical</span>
+          <h3>What's physically happening.</h3>
+          <p>The objective, molecular, and physical realities of the product and the baseline biological state of the human body.</p>
+        </div>
+        <div class="dna-card">
+          <span class="dna-num">02 — Experiential</span>
+          <h3>What's consciously felt.</h3>
+          <p>How stimulation of the senses and emotional response shape a person's subjective, in-the-moment perception.</p>
+        </div>
+        <div class="dna-card">
+          <span class="dna-num">03 — Contextual</span>
+          <h3>What shapes interpretation.</h3>
+          <p>The invisible social architectures, cultural norms, and environmental terrain that govern any moment.</p>
+        </div>
+        <div class="dna-connector">Together, they create an unmistakable feel-state DNA.</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap reveal">
+      <span class="eyebrow">Proof</span>
+      <h2 class="section-title">We help you shape the market you're in — not just compete inside it.</h2>
+      <div class="proof-stats">
+        <div class="stat-block">
+          <div class="stat-num">$1bn &rarr; $4.4bn</div>
+          <div class="stat-label">lululemon, 2012–2021 — shifted from selling clothes to serving sensory feel-states. Over $1bn from a single franchise.</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-num">37 &rarr; 6 strategies</div>
+          <div class="stat-label">Decathlon, 2023–2025 — restructured from fragmented silos (~700 projects) to a shared innovation singularity (~100 projects).</div>
+        </div>
+      </div>
+      <div class="highlight-quote">"Shifting lululemon from selling clothes to serving sensory feel-states."</div>
+      <div class="client-row">
+        <span>Decathlon</span><span>adidas</span><span>Nike</span><span>Coca-Cola</span>
+        <span>lululemon</span><span>Campari Group</span><span>McLaren</span><span>Speedo</span><span>Samsung</span><span>BMW</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap reveal">
+      <span class="eyebrow">Minimal team, deeply focused</span>
+      <h2 class="section-title">A curated assembly, not a bench of consultants.</h2>
+      <div class="team-grid">
+        <div class="team-card">
+          <img class="avatar" style="object-position:center 22%;" src="/assets/img/tom-waller.jpg" alt="Tom Waller">
+          <h3>Tom Waller</h3>
+          <div class="role">Founding Partner</div>
+          <p>25+ years driving growth and innovation across Speedo, lululemon, adidas, and Decathlon. Pioneer of feel-state economics.</p>
+        </div>
+        <div class="team-card">
+          <img class="avatar" style="object-position:center 20%;" src="/assets/img/dan-toon.jpg" alt="Dan Toon">
+          <h3>Dan Toon</h3>
+          <div class="role">Founding Partner</div>
+          <p>Innovation and product strategy leader drawing on applied engineering from McLaren and commercial leadership at PA Consulting.</p>
+        </div>
+        <div class="team-card">
+          <img class="avatar" style="object-position:center 15%;" src="/assets/img/jordan-goldfarb.jpg" alt="Jordan Goldfarb">
+          <h3>Jordan Goldfarb</h3>
+          <div class="role">Founding Partner</div>
+          <p>17+ years in product innovation, venture incubation, and sustainability across consumer goods, industrials, and energy.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="journal">
+    <div class="wrap reveal">
+      <span class="eyebrow">From the Journal</span>
+      <h2 class="section-title">From the founders — direct dispatches.</h2>
+      {% if collections.journal.length %}
+      <div class="journal-grid">
+        {% for post in collections.journal %}
+          {% if loop.index <= 3 %}
+          <a class="journal-card" href="{{ post.url }}">
+            <div class="journal-date">{{ post.data.date | postDate }}</div>
+            <h3>{{ post.data.title }}</h3>
+            <p>{{ post.data.teaser }}</p>
+          </a>
+          {% endif %}
+        {% endfor %}
+      </div>
+      {% else %}
+      <p class="journal-empty">No entries published yet — the first Journal post will appear here automatically.</p>
+      {% endif %}
+      <div class="journal-more"><a href="/journal/">Read the Journal &rarr;</a></div>
+    </div>
+  </section>
+
+  <section id="contact" class="cta-section">
+    <div class="wrap reveal">
+      <span class="eyebrow">Get in touch</span>
+      <h2>What if thinking big, moving small, and owning your feel-state was the secret to shaping the market you're in?</h2>
+      <a href="mailto:hello@andgoandco.com?subject=Let%27s%20talk&body=Hi%20there%2C%0A%0AWe%27re%20working%20on..." class="cta-btn">Tell us what you're working on</a>
+    </div>
+  </section>
+</main>

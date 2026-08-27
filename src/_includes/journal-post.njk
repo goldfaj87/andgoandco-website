@@ -1,0 +1,17 @@
+---
+layout: base.njk
+nav: journal
+---
+<article>
+  <div class="wrap post-header">
+    <span class="journal-date">{{ date | postDate }}</span>
+    <h1>{{ title }}</h1>
+    <p class="post-author">By <span>{{ author }}</span></p>
+  </div>
+  <div class="wrap post-body">
+    {{ content | safe }}
+    <div class="post-footer">
+      <a href="/journal/">&larr; Back to the Journal</a>
+    </div>
+  </div>
+</article>

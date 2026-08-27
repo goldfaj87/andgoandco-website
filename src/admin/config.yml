@@ -1,0 +1,38 @@
+backend:
+  name: git-gateway
+  branch: main
+
+# Netlify Identity + git-gateway handles login (set up in the Netlify dashboard —
+# see README.md "Go-live checklist"). No separate API keys needed.
+
+media_folder: "src/assets/img/journal"
+public_folder: "/assets/img/journal"
+
+collections:
+  - name: "journal"
+    label: "Journal"
+    label_singular: "Journal entry"
+    folder: "src/journal-posts"
+    create: true
+    slug: "{{slug}}"
+    identifier_field: title
+    extension: "md"
+    format: "frontmatter"
+    summary: "{{title}} — {{author}} — {{date}}"
+    fields:
+      - { label: "Layout", name: "layout", widget: "hidden", default: "journal-post.njk" }
+      - { label: "Title", name: "title", widget: "string" }
+      - label: "Author"
+        name: "author"
+        widget: "select"
+        options: ["Tom Waller", "Dan Toon", "Jordan Goldfarb"]
+      - { label: "Publish date", name: "date", widget: "datetime" }
+      - label: "Teaser"
+        name: "teaser"
+        widget: "text"
+        hint: "One sentence. Shown on the homepage and the Journal index — make it worth clicking."
+      - label: "Permalink"
+        name: "permalink"
+        widget: "hidden"
+        default: "/journal/{{ page.fileSlug }}/index.html"
+      - { label: "Body", name: "body", widget: "markdown" }

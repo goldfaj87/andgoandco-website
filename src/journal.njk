@@ -1,0 +1,34 @@
+---
+layout: base.njk
+title: "Journal"
+description: "Direct dispatches from the &go&co founders."
+nav: journal
+permalink: /journal/index.html
+---
+<div class="page-hero wrap reveal">
+  <span class="eyebrow">Journal</span>
+  <h1>From the founders — direct dispatches.</h1>
+  <p>No corporate insights, no ghostwriting — Tom, Dan, and Jordan write these themselves, when they have something worth saying.</p>
+</div>
+
+<section style="padding-top:0;">
+  <div class="wrap reveal">
+    {% if collections.journal.length %}
+    <div class="journal-list">
+      {% for post in collections.journal %}
+      <a class="journal-row" href="{{ post.url }}">
+        <div class="journal-row-main">
+          <h3>{{ post.data.title }}</h3>
+          <p>{{ post.data.teaser }}</p>
+        </div>
+        <div class="journal-row-meta">
+          {{ post.data.date | postDate }}<br>{{ post.data.author }}
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+    {% else %}
+    <p class="journal-empty">Nothing published yet — check back soon.</p>
+    {% endif %}
+  </div>
+</section>

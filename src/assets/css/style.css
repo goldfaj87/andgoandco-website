@@ -1,0 +1,325 @@
+:root{
+  --green-deep:#0b2a22;
+  --green:#12433a;
+  --teal:#1c6b62;
+  --teal-light:#2c8f80;
+  --navy:#0f2438;
+  --chartreuse:#d7f23c;
+  --cream:#f3f6ee;
+  --white:#ffffff;
+  --ink:#eef4ef;
+  --muted:rgba(238,244,239,0.72);
+  --faint:rgba(238,244,239,0.45);
+  --serif:'Playfair Display', Georgia, serif;
+  --sans:'Poppins', -apple-system, sans-serif;
+  --maxw:1160px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:var(--sans);
+  color:var(--ink);
+  background:var(--green-deep);
+  overflow-x:hidden;
+}
+.field{
+  position:relative;
+  background:
+    radial-gradient(circle at 15% 10%, rgba(160,220,190,0.16), transparent 45%),
+    linear-gradient(135deg, var(--green-deep) 0%, var(--green) 28%, var(--teal) 55%, var(--teal-light) 68%, var(--navy) 100%);
+  /* Not background-attachment:fixed — that reliably fails to repaint past the
+     first screen on mobile browsers (esp. iOS Safari), leaving blank white
+     behind everything below the fold. Scrolls with the page instead. */
+  min-height:100vh;
+}
+.field::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  opacity:0.35;
+  mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='matrix' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  background-size:160px 160px;
+  z-index:2000;
+}
+.wrap{max-width:var(--maxw); margin:0 auto; padding:0 32px;}
+
+/* NAV */
+nav{
+  position:fixed; top:0; left:0; right:0; z-index:500;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:18px 40px;
+  -webkit-backdrop-filter:blur(10px);
+  backdrop-filter:blur(10px);
+  background:rgba(9,32,26,0.82);
+}
+.logo-mark{display:flex; align-items:center;}
+.logo-mark img{height:26px; width:auto; display:block;}
+.navlinks{display:flex; gap:36px; align-items:center;}
+.navlinks a{
+  color:var(--muted); text-decoration:none; font-size:14px; font-weight:500;
+  letter-spacing:0.3px;
+  transition:color .2s ease;
+}
+.navlinks a:hover{color:var(--chartreuse);}
+.navlinks a.current{color:var(--white);}
+.navlinks a.cta{
+  color:var(--green-deep); background:var(--chartreuse);
+  padding:9px 18px; border-radius:2px; font-weight:600;
+}
+.navlinks a.cta:hover{color:var(--green-deep); opacity:0.9;}
+
+/* Mobile menu (hamburger) — hidden on desktop */
+.menu-btn{
+  display:none; width:44px; height:44px; padding:0;
+  background:none; border:none; cursor:pointer;
+  flex-direction:column; align-items:center; justify-content:center; gap:6px;
+}
+.menu-btn span{width:24px; height:2px; background:var(--white); display:block; transition:transform .2s ease, opacity .2s ease;}
+.menu-btn.open span:first-child{transform:translateY(4px) rotate(45deg);}
+.menu-btn.open span:last-child{transform:translateY(-4px) rotate(-45deg);}
+.mobile-menu{
+  display:none;
+  position:fixed; top:0; left:0; right:0; bottom:0; z-index:490;
+  background:rgba(8,28,23,0.97);
+  flex-direction:column; align-items:center; justify-content:center; gap:36px;
+  opacity:0; visibility:hidden; transition:opacity .25s ease;
+}
+.mobile-menu.open{opacity:1; visibility:visible;}
+.mobile-menu a{
+  color:var(--ink); text-decoration:none; font-family:var(--serif); font-size:28px; font-weight:700;
+}
+
+/* HERO */
+header.hero{
+  position:relative;
+  min-height:100vh;
+  min-height:100svh; /* accounts for mobile browser toolbars so content isn't cut off/jumpy on load */
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  text-align:center;
+  padding:120px 32px 80px;
+}
+.hero-mark{
+  margin-bottom:28px;
+  display:flex; justify-content:center;
+}
+.hero-mark img{
+  width:clamp(320px, 38vw, 560px); height:auto; display:block;
+}
+.hero-rule{
+  width:220px; height:1px; background:rgba(255,255,255,0.35); margin:0 auto 32px;
+}
+h1.headline{
+  font-family:var(--serif); font-weight:700; font-style:normal;
+  font-size:clamp(34px, 5.4vw, 62px);
+  line-height:1.12;
+  max-width:820px;
+  letter-spacing:0;
+}
+.headline .accent{color:var(--chartreuse);}
+.hero-sub{
+  margin-top:24px; max-width:560px;
+  font-size:16px; color:var(--muted); line-height:1.6;
+  font-weight:300;
+}
+.hero-tags{
+  margin-top:34px; display:flex; gap:14px; font-size:13px;
+  color:var(--faint); letter-spacing:0.6px; text-transform:uppercase;
+}
+.hero-tags span:not(:last-child)::after{content:"\00b7"; margin-left:14px; color:var(--faint);}
+.scroll-cue{
+  position:absolute; bottom:36px; left:50%; transform:translateX(-50%);
+  font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--faint);
+}
+
+/* PAGE HERO (Approach / Journal / Contact top-of-page) */
+.page-hero{
+  padding:180px 0 60px;
+}
+.page-hero h1{
+  font-family:var(--serif); font-weight:700; font-size:clamp(32px,5vw,54px);
+  line-height:1.15; max-width:760px; margin-bottom:18px;
+}
+.page-hero p{color:var(--muted); font-size:16px; line-height:1.7; max-width:600px; font-weight:300;}
+
+section{position:relative; padding:110px 0; z-index:1;}
+.eyebrow{
+  font-size:12px; letter-spacing:2.5px; text-transform:uppercase;
+  color:var(--chartreuse); font-weight:600; margin-bottom:18px; display:block;
+}
+h2.section-title{
+  font-family:var(--serif); font-style:normal;
+  font-size:clamp(28px, 3.4vw, 40px); font-weight:700; letter-spacing:0;
+  max-width:680px; line-height:1.25; margin-bottom:16px;
+}
+p.section-lede{
+  max-width:560px; color:var(--muted); font-size:16px; line-height:1.7; font-weight:300;
+}
+
+/* fade-in on scroll */
+.reveal{opacity:0; transform:translateY(28px); transition:opacity .8s ease, transform .8s ease;}
+.reveal.in{opacity:1; transform:translateY(0);}
+
+/* WHAT WE DO */
+.value-grid{
+  display:grid; grid-template-columns:1fr 1fr; gap:2px;
+  margin-top:56px;
+  border-top:1px solid rgba(255,255,255,0.15);
+}
+.value-cell{
+  padding:38px 6px 38px 0; border-bottom:1px solid rgba(255,255,255,0.15);
+}
+.value-cell:nth-child(odd){border-right:1px solid rgba(255,255,255,0.15); padding-right:40px;}
+.value-cell:nth-child(even){padding-left:40px;}
+.value-cell h3{font-family:var(--serif); font-size:22px; font-weight:700; margin-bottom:10px;}
+.value-cell p{color:var(--muted); font-size:14.5px; line-height:1.65; font-weight:300; max-width:400px;}
+
+/* DNA FRAMEWORK / METHODOLOGY CARDS */
+.dna-wrap{margin-top:64px; display:grid; grid-template-columns:repeat(3,1fr); gap:28px;}
+.dna-wrap.five{grid-template-columns:repeat(5,1fr);}
+.dna-card{
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.14);
+  border-radius:4px;
+  padding:32px 26px;
+  transition:transform .3s ease, opacity .3s ease;
+}
+.dna-num{font-family:var(--serif); font-style:italic; font-size:15px; color:var(--chartreuse); margin-bottom:18px; display:block;}
+.dna-card h3{font-family:var(--serif); font-size:21px; font-weight:700; margin-bottom:10px;}
+.dna-card p{color:var(--muted); font-size:14px; line-height:1.6; font-weight:300;}
+.dna-connector{
+  grid-column:1/-1; text-align:center; color:var(--faint); font-size:13px;
+  letter-spacing:0.5px; margin-top:6px; font-style:italic; font-family:var(--serif);
+}
+
+/* PROOF */
+.proof-stats{display:grid; grid-template-columns:1fr 1fr; gap:40px; margin-top:56px;}
+.stat-block{border-left:2px solid var(--chartreuse); padding-left:24px;}
+.stat-num{font-family:var(--serif); font-size:clamp(30px,4vw,44px); font-weight:700; letter-spacing:0;}
+.stat-label{color:var(--muted); font-size:13.5px; margin-top:8px; font-weight:300; line-height:1.5;}
+.highlight-quote{
+  margin-top:56px; display:inline-block;
+  background:var(--chartreuse); color:var(--green-deep);
+  padding:10px 16px; font-weight:700; font-size:17px; font-style:italic;
+  line-height:1.5; box-decoration-break:clone;
+}
+.client-row{
+  margin-top:56px; padding-top:34px; border-top:1px solid rgba(255,255,255,0.14);
+  display:flex; flex-wrap:wrap; gap:34px; align-items:center;
+}
+.client-row span{
+  font-size:13px; letter-spacing:1.5px; text-transform:uppercase; color:var(--faint); font-weight:500;
+}
+
+/* TEAM */
+.team-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:36px; margin-top:56px;}
+.avatar{
+  width:100%; aspect-ratio:1/1; border-radius:4px; margin-bottom:18px;
+  display:block; object-fit:cover;
+  border:1px solid rgba(255,255,255,0.14);
+}
+.team-card h3{font-family:var(--serif); font-size:20px; font-weight:700;}
+.team-card .role{color:var(--chartreuse); font-size:12.5px; letter-spacing:1px; text-transform:uppercase; margin:6px 0 12px;}
+.team-card p{color:var(--muted); font-size:14px; line-height:1.65; font-weight:300;}
+
+/* JOURNAL */
+.journal-grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(260px, 360px)); gap:28px; margin-top:56px;}
+.journal-card{
+  border:1px solid rgba(255,255,255,0.14); border-radius:4px; padding:26px;
+  transition:border-color .25s ease;
+  display:block; text-decoration:none; color:var(--ink);
+}
+.journal-card:hover{border-color:var(--chartreuse);}
+.journal-date{font-size:12px; color:var(--faint); letter-spacing:0.8px; text-transform:uppercase;}
+.journal-card h3{font-family:var(--serif); font-size:20px; font-weight:700; margin:12px 0 10px; line-height:1.35;}
+.journal-card p{color:var(--muted); font-size:14px; line-height:1.6; font-weight:300;}
+.journal-more{margin-top:44px; text-align:center;}
+.journal-more a{color:var(--chartreuse); font-size:14px; font-weight:600; text-decoration:none; letter-spacing:0.3px;}
+.journal-empty{color:var(--muted); font-size:15px; margin-top:56px;}
+
+/* JOURNAL LIST PAGE */
+.journal-list{margin-top:16px;}
+.journal-row{
+  display:flex; justify-content:space-between; align-items:baseline; gap:24px;
+  padding:28px 0; border-bottom:1px solid rgba(255,255,255,0.14);
+  text-decoration:none; color:var(--ink);
+}
+.journal-row:hover h3{color:var(--chartreuse);}
+.journal-row-main{flex:1;}
+.journal-row h3{font-family:var(--serif); font-size:22px; font-weight:700; margin-bottom:6px; transition:color .2s ease;}
+.journal-row p{color:var(--muted); font-size:14px; font-weight:300;}
+.journal-row-meta{white-space:nowrap; color:var(--faint); font-size:12.5px; text-align:right; letter-spacing:0.4px;}
+
+/* JOURNAL POST */
+.post-header{padding:170px 0 40px;}
+.post-header .journal-date{display:block; margin-bottom:14px;}
+.post-header h1{
+  font-family:var(--serif); font-weight:700; font-size:clamp(30px,4.6vw,48px);
+  line-height:1.2; max-width:760px;
+}
+.post-author{margin-top:22px; color:var(--muted); font-size:14px;}
+.post-author span{color:var(--chartreuse);}
+.post-body{max-width:680px; padding-bottom:100px; font-size:17px; line-height:1.8; font-weight:300;}
+.post-body h2{font-family:var(--serif); font-size:28px; font-weight:700; margin:40px 0 16px;}
+.post-body h3{font-family:var(--serif); font-size:22px; font-weight:700; margin:32px 0 14px;}
+.post-body p{margin-bottom:20px;}
+.post-body a{color:var(--chartreuse); text-decoration:underline;}
+.post-body ul, .post-body ol{margin:0 0 20px 22px;}
+.post-body li{margin-bottom:8px;}
+.post-body blockquote{
+  border-left:2px solid var(--chartreuse); padding-left:20px; margin:28px 0;
+  font-style:italic; color:var(--muted);
+}
+.post-body img{width:100%; border-radius:4px; margin:24px 0;}
+.post-footer{border-top:1px solid rgba(255,255,255,0.14); padding-top:28px; margin-top:20px;}
+.post-footer a{color:var(--chartreuse); text-decoration:none; font-weight:600; font-size:14px;}
+
+/* CONTACT */
+.contact-block{margin-top:40px; display:flex; flex-direction:column; gap:10px;}
+.contact-block a{color:var(--chartreuse); font-size:18px; text-decoration:none; font-weight:600;}
+.contact-block span{color:var(--faint); font-size:13px;}
+
+/* CTA */
+.cta-section{text-align:center; padding:140px 0;}
+.cta-section h2{font-family:var(--serif); font-style:normal; font-size:clamp(32px,4.6vw,52px); font-weight:700; max-width:640px; margin:0 auto 26px; line-height:1.2;}
+.cta-btn{
+  display:inline-block; margin-top:10px;
+  background:var(--chartreuse); color:var(--green-deep);
+  padding:16px 36px; border-radius:2px; font-weight:600; font-size:15px;
+  text-decoration:none; letter-spacing:0.3px;
+  transition:transform .2s ease;
+}
+.cta-btn:hover{transform:translateY(-2px);}
+
+footer{
+  border-top:1px solid rgba(255,255,255,0.14);
+  padding:48px 0 60px;
+  display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:24px;
+}
+footer .logo-mark img{height:22px;}
+footer .foot-links{display:flex; gap:28px;}
+footer .foot-links a{color:var(--muted); font-size:13px; text-decoration:none;}
+footer .foot-meta{color:var(--faint); font-size:12px;}
+
+@media (max-width:820px){
+  .value-grid, .dna-wrap, .proof-stats, .team-grid, .journal-grid{grid-template-columns:1fr;}
+  .dna-wrap.five{grid-template-columns:1fr;}
+  .value-cell:nth-child(odd){border-right:none; padding-right:0;}
+  .value-cell:nth-child(even){padding-left:0;}
+  .navlinks{gap:14px;}
+  .navlinks a:not(.cta){display:none;}
+  .menu-btn{display:flex;}
+  .mobile-menu{display:flex;}
+  .journal-row{flex-direction:column; align-items:flex-start; gap:6px;}
+  .journal-row-meta{text-align:left;}
+
+  /* Drop GPU-heavy effects on touch/small screens: backdrop-filter blur and a
+     fixed, blend-mode grain layer are both well-known causes of visible
+     whiteout/blanking while actively scrolling on mobile browsers. The nav
+     is already solid enough to read without the blur; the grain texture is
+     a nice-to-have, not worth the scroll jank on lower-powered devices. */
+  nav{-webkit-backdrop-filter:none; backdrop-filter:none; background:rgba(9,32,26,0.94);}
+  .field::before{display:none;}
+  html{scroll-behavior:auto;} /* animated smooth-scroll is the same repaint cost, over a longer window */
+}

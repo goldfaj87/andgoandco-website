@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% if title %}{{ title }} — &amp;go&amp;co{% else %}&amp;go&amp;co{% endif %}</title>
+<meta name="description" content="{{ description or 'DNA-led innovation for experiences that make you uniquely valued and desired by the world.' }}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700;1,900&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<!-- Netlify Identity widget — needed site-wide so the /admin login redirect works from any page -->
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+</head>
+<body class="field">
+
+<nav>
+  <a class="logo-mark" href="/"><img src="/assets/img/logo.png" alt="&amp;go&amp;co."></a>
+  <div class="navlinks">
+    <a href="/approach/" class="{{ 'current' if nav == 'approach' }}">Approach</a>
+    <a href="/journal/" class="{{ 'current' if nav == 'journal' }}">Journal</a>
+    <a href="mailto:hello@andgoandco.com?subject=Let%27s%20talk&body=Hi%20there%2C%0A%0AWe%27re%20working%20on..." class="cta">Contact</a>
+  </div>
+  <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="/approach/">Approach</a>
+  <a href="/journal/">Journal</a>
+  <a href="mailto:hello@andgoandco.com?subject=Let%27s%20talk&body=Hi%20there%2C%0A%0AWe%27re%20working%20on...">Contact</a>
+</div>
+
+{{ content | safe }}
+
+<footer>
+  <div class="wrap" style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:24px; width:100%;">
+    <a class="logo-mark" href="/"><img src="/assets/img/logo.png" alt="&amp;go&amp;co."></a>
+    <div class="foot-links">
+      <a href="/approach/">Approach</a>
+      <a href="/journal/">Journal</a>
+      <a href="mailto:hello@andgoandco.com?subject=Let%27s%20talk&body=Hi%20there%2C%0A%0AWe%27re%20working%20on...">Contact</a>
+    </div>
+    <div class="foot-meta">&copy; {% year %} &amp;go&amp;co. All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+  var reveals = document.querySelectorAll('.reveal');
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); } });
+  }, {threshold:0.15});
+  reveals.forEach(function(r){ io.observe(r); });
+
+  var menuBtn = document.getElementById('menuBtn');
+  var mobileMenu = document.getElementById('mobileMenu');
+  menuBtn.addEventListener('click', function(){
+    var isOpen = mobileMenu.classList.toggle('open');
+    menuBtn.classList.toggle('open', isOpen);
+    menuBtn.setAttribute('aria-expanded', isOpen);
+  });
+  mobileMenu.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      mobileMenu.classList.remove('open');
+      menuBtn.classList.remove('open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+    });
+  });
+</script>
+
+</body>
+</html>
