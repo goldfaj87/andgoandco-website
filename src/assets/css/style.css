@@ -291,6 +291,9 @@ p.section-lede{
   transition:transform .2s ease;
 }
 .cta-btn:hover{transform:translateY(-2px);}
+.cta-fallback{margin-top:20px; color:var(--muted); font-size:13.5px; font-weight:300;}
+.cta-fallback a{color:var(--chartreuse); font-weight:600; text-decoration:none;}
+.cta-fallback a:hover{text-decoration:underline;}
 
 footer{
   border-top:1px solid rgba(255,255,255,0.14);
