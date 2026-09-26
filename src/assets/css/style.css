@@ -238,6 +238,12 @@ p.section-lede{
 .journal-more a{color:var(--chartreuse); font-size:14px; font-weight:600; text-decoration:none; letter-spacing:0.3px;}
 .journal-empty{color:var(--muted); font-size:15px; margin-top:56px;}
 
+/* JOURNAL PAGER (index page, 9 tiles per page) */
+.journal-pager{display:flex; justify-content:space-between; align-items:center; gap:20px; margin-top:56px; padding-top:32px; border-top:1px solid rgba(255,255,255,0.14);}
+.pager-link{color:var(--chartreuse); font-size:14px; font-weight:600; text-decoration:none; letter-spacing:0.3px;}
+.pager-link.disabled{color:var(--faint); pointer-events:none;}
+.pager-status{color:var(--faint); font-size:13px; letter-spacing:0.4px; white-space:nowrap;}
+
 /* JOURNAL LIST PAGE */
 .journal-list{margin-top:16px;}
 .journal-row{
@@ -316,6 +322,7 @@ footer .foot-meta{color:var(--faint); font-size:12px;}
   .mobile-menu{display:flex;}
   .journal-row{flex-direction:column; align-items:flex-start; gap:6px;}
   .journal-row-meta{text-align:left;}
+    .journal-pager{flex-direction:column; gap:14px; text-align:center;}
 
   /* Drop GPU-heavy effects on touch/small screens: backdrop-filter blur and a
      fixed, blend-mode grain layer are both well-known causes of visible
