@@ -3,7 +3,11 @@ layout: base.njk
 title: "Journal"
 description: "Direct dispatches from the &go&co founders."
 nav: journal
-permalink: /journal/index.html
+pagination:
+  data: collections.journal
+  size: 9
+  alias: posts
+permalink: "{% if pagination.pageNumber == 0 %}/journal/index.html{% else %}/journal/page/{{ pagination.pageNumber + 1 }}/index.html{% endif %}"
 ---
 <div class="page-hero wrap reveal">
   <span class="eyebrow">Journal</span>
@@ -13,20 +17,35 @@ permalink: /journal/index.html
 
 <section style="padding-top:0;">
   <div class="wrap reveal">
-    {% if collections.journal.length %}
-    <div class="journal-list">
-      {% for post in collections.journal %}
-      <a class="journal-row" href="{{ post.url }}">
-        <div class="journal-row-main">
-          <h3>{{ post.data.title }}</h3>
-          <p>{{ post.data.teaser }}</p>
-        </div>
-        <div class="journal-row-meta">
-          {{ post.data.date | postDate }}<br>{{ post.data.author }}
-        </div>
+    {% if posts.length %}
+    <div class="journal-grid">
+      {% for post in posts %}
+      <a class="journal-card" href="{{ post.url }}">
+        <div class="journal-date">{{ post.data.date | postDate }} &middot; {{ post.data.author }}</div>
+        <h3>{{ post.data.title }}</h3>
+        <p>{{ post.data.teaser }}</p>
       </a>
       {% endfor %}
     </div>
+
+    {% if pagination.pages.length > 1 %}
+    <div class="journal-pager" role="navigation" aria-label="Journal pages">
+      {% if pagination.href.previous %}
+      <a class="pager-link" href="{{ pagination.href.previous }}">&larr; Newer posts</a>
+      {% else %}
+      <span class="pager-link disabled">&larr; Newer posts</span>
+      {% endif %}
+
+      <span class="pager-status">Page {{ pagination.pageNumber + 1 }} of {{ pagination.pages.length }}</span>
+
+      {% if pagination.href.next %}
+      <a class="pager-link" href="{{ pagination.href.next }}">Older posts &rarr;</a>
+      {% else %}
+      <span class="pager-link disabled">Older posts &rarr;</span>
+      {% endif %}
+    </div>
+    {% endif %}
+
     {% else %}
     <p class="journal-empty">Nothing published yet — check back soon.</p>
     {% endif %}
