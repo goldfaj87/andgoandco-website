@@ -1,6 +1,6 @@
 ---
 layout: journal-post.njk
-title: Meaning Making Machines
+title: Uniquely Coded
 author: Tom Waller
 date: 2026-09-07T14:55:00.000-04:00
 teaser: On the Coca-Cola bottle test, why "lighter" doesn't always mean lighter,
